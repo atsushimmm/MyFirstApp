@@ -1,0 +1,8 @@
+# Application dependencies
+
+require:
+    - play
+
+val appDependencies = Seq(
+  "org.hibernate" % "hibernate-entitymanager" % "5.0.0.CR2"
+)

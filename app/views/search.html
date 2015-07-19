@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+	 <link rel="stylesheet" media="screen" href="/public/stylesheets/search/styles.css"/>
+        <meta charset="${_response_encoding}">
+	#{script 'jquery-1.6.4.min.js' /}
+  <script languge="javascript">
+ 
+     $( document ).ready(updateLocations(null,"#country"));
+
+	function updateLocations(country,obj){
+		var url ="/locations.html";
+		if(country != null){
+			url +="?country=";
+			url +=country;
+		}
+		if(obj === "#city" ){
+			$(obj).empty();
+		}
+        	$.getJSON(url,
+           		function(data){
+              			var country_list = $(obj);
+              			var items=[];
+              			$.each(data,function(key,val){
+                 			$(obj).append($("<option value='"+val.idx+"'>"+val.value+"</option>") );
+              		});
+        	});
+	}
+
+	function updateSearchResult(city){
+		var obj ="#searchresult";
+		var url="/application/searchresult";
+		if( city != null ){
+			url += "?city=";
+			url += city;
+		}
+		$(obj).empty();
+
+                $.getJSON(url,
+                        function(data){
+				console.log(data);
+                                var country_list = $(obj);
+                                var items=[];
+                                $.each(data,function(key,val){
+                                	$(obj).append($("<div class='depot_frame'>"+
+							"<div class='depot_name'>"+val.depot_name+"</div>"+
+							"<div class='address'>"+val.address+"</div>"+
+							"<div class='telephone'>"+val.telephone+"</div>"+
+							"<div class='latitude'>"+val.location.latitude+"</div>"+
+							"<div class='longitude'>"+val.location.longitude+"</div>"+
+							"</div>") );
+                        });
+                });
+	} 
+  </script>
+ 
+    </head>
+    <body>
+         <div id="search_form">
+		Depot search <br/>
+          	#{form @Application.searchresult()}
+	  		<select name="country" id="country" onChange="updateLocations(this.value,'#city')">
+          		</select>
+			<select name="city"   id="city">
+			</select>
+			<input type="button" value="submit" onClick="updateSearchResult(document.getElementById('city').value)"/>
+      		#{/form}
+
+		<div id="searchresult">
+		</div>
+         </div>
+    </body>
+</html>

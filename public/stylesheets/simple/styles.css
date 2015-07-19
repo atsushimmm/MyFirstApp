@@ -1,0 +1,40 @@
+
+#simple_arguments {
+   border-style: solid;
+   border-color: black;
+   border-width: 1px;
+   width:100%;
+   height:auto;
+}
+
+.row {
+   width:500; 
+   height:30px;
+   margin:auto;
+   display: table;
+   position: relative;
+}
+
+.key {
+  width: 248px;
+  height: 100%; 
+  border-style: solid;
+  border-width: 1px;
+  margin-left : 0px;
+  margin-right: 0px;
+  margin-top  : 0px;
+  margin-bottom:0px;
+  float:left;
+}
+
+.value {
+  width: 248px;
+  height: 100%;
+  border-style: solid;
+  border-width: 1px;
+  margin-left : 0px;
+  margin-right: 0px;
+  margin-top  : 0px; 
+  margin-bottom: 0px;
+  float:right;
+}

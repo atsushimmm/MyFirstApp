@@ -1,0 +1,20 @@
+
+<HTML>
+    <HEAD>
+       <TITLE>Hello Simple Page</TITLE>
+       <link rel="stylesheet" media="screen" href="/public/stylesheets/simple/styles.css"/>
+    </HEAD>
+    <BODY>
+
+        <div class="row"> Sample of URL parameters iteration </div>
+
+
+         <div id="simple_arguments">
+    %{   for(key in params.allSimple().keySet() ){ if(!key.equals("body")){ }%
+          <div class="row">
+             <div class="key">${key}</div><div class="value">&nbsp;${params.get(key)}</div>
+          </div>
+     %{ } } }%
+         </div>
+    </BODY>
+</HTML>
