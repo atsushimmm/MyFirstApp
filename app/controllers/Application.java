@@ -86,5 +86,10 @@ public class Application extends Controller {
     		render("search.html");
     	else if(id.equals("simple.html"))
     		render("simple.html");
+	else if(id.equals("main.html"))
+		render("main.html");
+        else if(id.equals("test.html"))
+		render("test.html");
     }
+   
 }

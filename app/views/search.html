@@ -3,15 +3,16 @@
 <html>
     <head>
         <title>#{get 'title' /}</title>
-	 <link rel="stylesheet" media="screen" href="/public/stylesheets/search/styles.css"/>
-        <meta charset="${_response_encoding}">
+	 <link rel="stylesheet" media="screen" href="/MyFirstApp/public/stylesheets/search/styles.css"/>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+        <meta charset="${_response_encoding}"/>
+    </head>
 	#{script 'jquery-1.6.4.min.js' /}
   <script languge="javascript">
- 
-     $( document ).ready(updateLocations(null,"#country"));
+
 
 	function updateLocations(country,obj){
-		var url ="/locations.html";
+		var url ="/MyFirstApp/locations.html";
 		if(country != null){
 			url +="?country=";
 			url +=country;
@@ -31,7 +32,7 @@
 
 	function updateSearchResult(city){
 		var obj ="#searchresult";
-		var url="/application/searchresult";
+		var url="/MyFirstApp/application/searchresult";
 		if( city != null ){
 			url += "?city=";
 			url += city;
@@ -40,7 +41,7 @@
 
                 $.getJSON(url,
                         function(data){
-				console.log(data);
+				$("#gmap")[0].contentWindow.clearMarkers();
                                 var country_list = $(obj);
                                 var items=[];
                                 $.each(data,function(key,val){
@@ -51,14 +52,19 @@
 							"<div class='latitude'>"+val.location.latitude+"</div>"+
 							"<div class='longitude'>"+val.location.longitude+"</div>"+
 							"</div>") );
+					 console.log("latitude="+val.location.latitude);
+					$("#gmap")[0].contentWindow.placePin(val.location.latitude,
+									val.location.longitude,
+									val.depot_name);
+					$("#gmap")[0].contentWindow.showMarkers();
                         });
+	
                 });
 	} 
   </script>
  
-    </head>
-    <body>
-         <div id="search_form">
+    <body onload="updateLocations(null,'#country')">
+        <div id="search_form">
 		Depot search <br/>
           	#{form @Application.searchresult()}
 	  		<select name="country" id="country" onChange="updateLocations(this.value,'#city')">
@@ -67,9 +73,10 @@
 			</select>
 			<input type="button" value="submit" onClick="updateSearchResult(document.getElementById('city').value)"/>
       		#{/form}
-
 		<div id="searchresult">
 		</div>
          </div>
+	<br/>
+        <iframe width="100%" height="700px" id="gmap" src="/MyFirstApp/test.html"></iframe>
     </body>
 </html>
