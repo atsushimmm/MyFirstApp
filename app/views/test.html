@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple icons</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+var markers = [];
+var map;
+
+// This example adds a marker to indicate the position of Bondi Beach in Sydney,
+// Australia.
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 25,
+    center: {lat: 59.92 , lng: 10.79 }
+  });
+}
+
+
+function placePin(_x, _y, _title){
+  var marker = new google.maps.Marker({
+    position:new google.maps.LatLng(_x, _y),
+    map: map,
+    title : _title 
+  });
+   marker.setMap(map);
+   markers.push(marker);
+
+}
+
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
+  markers = [];
+}
+
+function showMarkers(){
+  setMapOnAll(map);
+}
+
+// Sets the map on all markers in the array.
+
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyYTFXJ-rwCyWZZM-aVXWEftkklz090GE&signed_in=true&callback=initMap"></script>
+  </body>
+  <div id="map"/>
+</html>
