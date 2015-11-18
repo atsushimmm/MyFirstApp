@@ -24,7 +24,7 @@ var map;
 // Australia.
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 25,
+    zoom: 10,
     center: {lat: 59.92 , lng: 10.79 }
   });
 }
@@ -39,6 +39,11 @@ function placePin(_x, _y, _title){
    marker.setMap(map);
    markers.push(marker);
 
+}
+
+
+function setFocus(_x,_y){
+   map.setCenter(new google.maps.LatLng(_x, _y));
 }
 
 function setMapOnAll(map) {
@@ -62,6 +67,6 @@ function showMarkers(){
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyYTFXJ-rwCyWZZM-aVXWEftkklz090GE&signed_in=true&callback=initMap"></script>
-  </body>
   <div id="map"/>
+  </body>
 </html>
